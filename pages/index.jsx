@@ -1,40 +1,29 @@
-import { getSession } from 'next-auth/react';
-import Head from 'next/head';
-import Login from "./Login";
-import Header from '../components/Header';
+import { useSession } from 'next-auth/react'
+import Login from './Login'
+import Header from '../components/Header/Header'
+import Sidebar from '../components/Sidebar/Sidebar'
 
 
-export default function Home({session}) {
-  if(!session) return <Login/>;
+export default function Home() {
+  const { data: session } = useSession();
 
   return (
-    <div>
-      <Head>
-        <title>Facebook Clone</title>
-        <link rel="icon" href="/facebook.svg" />
-      </Head>
+    <>
+      {session ? (
+        <>
+          <Header />
+          <main className='flex'>
+            {/* sidebar */}
+            <Sidebar/>
 
-      {/* Header */}
-      <Header/>
+            {/* Feed */}
 
-      <main>
-        {/* Sidebar */}
-
-        {/* Feed */}
-
-        {/* Widget */}
-      </main>
-    </div>
+            {/* Widget */}
+          </main>
+        </>
+      ) : (
+        <Login />
+      )}
+    </>
   )
-}
-
-
-export async function getServerSideProps(context) {
-   const session = await getSession(context);
-
-   return {
-     props: {
-       session
-     }
-   }
 }

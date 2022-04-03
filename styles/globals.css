@@ -25,6 +25,6 @@
     }
 
     .login-btn {
-        @apply p-5 text-white text-center bg-blue-500 hover:bg-blue-600 rounded-full cursor-pointer
+        @apply p-5 mt-5 text-xl text-white text-center bg-blue-500 hover:bg-blue-600 rounded-full cursor-pointer tracking-wider
     }
 }
